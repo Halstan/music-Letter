@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:6060/musicLetter
+    username: postgres
+    password: posgre
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true
+server:
+  port: 7050
+  error:
+    include-message: always
+  servlet:
+    context-path: /api/back
