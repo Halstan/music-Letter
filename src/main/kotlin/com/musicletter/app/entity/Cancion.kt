@@ -12,7 +12,7 @@ class Cancion: Auditoria() {
     @Id
     var idCancion: String? = null
 
-    @Column(length = 40)
+    @Column(length = 40, nullable = false)
     val nombre: String? = null
 
     @Temporal(TemporalType.DATE)
@@ -21,6 +21,12 @@ class Cancion: Auditoria() {
     @ManyToOne
     @JoinColumn(name = "idIdioma")
     val idioma: Idioma? = null
+
+    @Column(length = 1000)
+    val letra: String? = null
+
+    @Column(length = 200)
+    val urlVideo: String? = null
 
     @ManyToOne
     @JoinColumn(name = "idAlbum")

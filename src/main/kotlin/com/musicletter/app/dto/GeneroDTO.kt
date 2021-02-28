@@ -1,8 +1,8 @@
 package com.musicletter.app.dto
 
-class IdiomaDTO {
+class GeneroDTO {
 
-    var idIdioma: Int? = null
+    var idGenero: Int? = null
 
     var nombre: String? = null
 

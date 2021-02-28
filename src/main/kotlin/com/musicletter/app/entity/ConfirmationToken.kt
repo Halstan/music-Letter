@@ -11,7 +11,7 @@ data class ConfirmationToken constructor (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 100)
-    private var tokenid: Long? = null,
+    var tokenid: Long? = null,
 
     @Column(length = 100)
     var confirmationToken: String? = null,

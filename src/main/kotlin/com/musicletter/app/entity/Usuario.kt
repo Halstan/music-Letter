@@ -24,10 +24,15 @@ class Usuario : Auditoria() {
     @Column(length = 90, nullable = false)
     val contrasenha: String? = null
 
-    val estado: Boolean? = null
+    var estado: Boolean? = null
 
     @ManyToOne
     @JoinColumn(name = "idRol")
     val rol: Rol? = null
+
+    @PrePersist
+    fun init(){
+        estado = false
+    }
 
 }

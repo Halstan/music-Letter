@@ -1,5 +1,6 @@
 package com.musicletter.app.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import org.hibernate.envers.Audited
 import java.util.*
 import javax.persistence.*
@@ -27,6 +28,7 @@ class Album : Auditoria() {
     val subGeneros: Set<Genero>? = null
 
     @OneToMany(mappedBy = "album")
+    @JsonIgnore
     val canciones: Set<Cancion>? = null
 
     @Column(length = 50, nullable = false)

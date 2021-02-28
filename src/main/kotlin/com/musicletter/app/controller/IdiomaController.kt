@@ -11,12 +11,10 @@ import java.util.*
 
 @RestController
 @RequestMapping("/idiomas")
-class IdiomaController constructor (
-    val idiomaService: IdiomaService
+class IdiomaController (
+    val idiomaService: IdiomaService,
+    val idiomaMapper: IdiomaMapperImpl
     ){
-
-    @Autowired
-    lateinit var idiomaMapper: IdiomaMapperImpl
 
     companion object {
         const val type = "application/json;charset=UTF-8"
