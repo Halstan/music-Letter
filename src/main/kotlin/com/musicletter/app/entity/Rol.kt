@@ -13,7 +13,7 @@ data class Rol constructor (
     val idRol: Int,
 
     @Column(length = 30, nullable = false)
-    val nombre: String
+    val nombre: String? = null
 
     ) : Auditoria() {
 }

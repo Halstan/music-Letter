@@ -1,10 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Correo Latintravel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            font-size: 62.5%;
+        }
+        body {
+            font-size: 1.6rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        .bg-gradient {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background: rgba(223, 147, 85, 0.6);
+            overflow: hidden;
+        }
+        .confirmar {
+            position: relative;
+            background: rgb(255, 244, 244);
+            width: 90%;
+            max-width: 60rem;
+            margin: 0 auto;
+            border-radius: 1rem;
+            padding: 3rem 2rem;
+            margin-top: 6rem;
+        }
+        .confirmar img {
+            height: 8rem;
+        }
+        .confirmar p {
+            font-size: 1.8rem;
+            margin-bottom: 6rem;
+        }
+        .confirmar p strong {
+            font-size: 2rem;
+        }
+        .confirmar a {
+            background: rgb(248, 161, 90);
+            padding: 1.5rem 4rem;
+            border-radius: 0.5rem;
+            color: rgb(41, 41, 41);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+<main class="bg-gradient">
 
+    <section class="confirmar">
+        <img src="https://pbs.twimg.com/profile_images/1304540303056154624/-XjbxoBI_400x400.jpg"
+             alt="Prueba"/>
+
+        <p class="message">
+            Hola <strong th:text="${recipientName}"></strong>, bienvenido a
+            <strong>ListenMe</strong>, para poder usar su cuenta, usted debe
+            activarla presionando el siguiente botón.
+        </p>
+
+        <a th:href="${text}">Activar Cuenta</a>
+    </section>
+</main>
 </body>
 </html>

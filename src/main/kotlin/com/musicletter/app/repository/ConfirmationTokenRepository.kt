@@ -8,7 +8,7 @@ import java.util.*
 
 interface ConfirmationTokenRepository : JpaRepository<ConfirmationToken, Long> {
 
-    fun findByConfirmationTokenAndEstadoIsTrue(confirmationToken: String?): Optional<ConfirmationToken?>?
+    fun findByConfirmationTokenAndEstadoIsTrue(confirmationToken: String): Optional<ConfirmationToken>
 
     @Modifying
     @Query("UPDATE ConfirmationToken ct set ct.estado = false where ct.confirmationToken = ?1")

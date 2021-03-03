@@ -12,10 +12,8 @@ class ConfirmationTokenService (
     ) {
 
     @Transactional(readOnly = true)
-    fun findByConfirmationToken(confirmationToken: String?): ConfirmationToken? {
-        val op: Optional<ConfirmationToken?>? =
-            confirmationTokenRepository.findByConfirmationTokenAndEstadoIsTrue(confirmationToken)
-        return if (op!!.isPresent) op.get() else ConfirmationToken()
+    fun findByConfirmationToken(confirmationToken: String): Optional<ConfirmationToken> {
+        return confirmationTokenRepository.findByConfirmationTokenAndEstadoIsTrue(confirmationToken)
     }
 
     @Transactional
@@ -24,11 +22,11 @@ class ConfirmationTokenService (
     }
 
     @Transactional
-    fun desactivarToken(token: String?): ConfirmationToken? {
-        val op: Optional<ConfirmationToken?>? =
+    fun desactivarToken(token: String): ConfirmationToken {
+        val op: Optional<ConfirmationToken> =
             confirmationTokenRepository.findByConfirmationTokenAndEstadoIsTrue(token)
         confirmationTokenRepository.desactivarToken(token)
-        return op!!.get()
+        return op.get()
     }
 
 }

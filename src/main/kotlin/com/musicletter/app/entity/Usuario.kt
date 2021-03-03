@@ -21,14 +21,17 @@ class Usuario : Auditoria() {
     @Column(length = 50, unique = true, nullable = false)
     val nombreDeUsuario: String? = null
 
+    @Column(length = 60, unique = true, nullable = false)
+    val correo: String? = null
+
     @Column(length = 90, nullable = false)
-    val contrasenha: String? = null
+    lateinit var contrasenha: String
 
     var estado: Boolean? = null
 
     @ManyToOne
     @JoinColumn(name = "idRol")
-    val rol: Rol? = null
+    var rol: Rol? = null
 
     @PrePersist
     fun init(){

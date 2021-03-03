@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
@@ -22,8 +23,8 @@ import javax.sql.DataSource
 @EnableWebSecurity
 @Configuration
 class SecurityConfig (
-    val dataSource: DataSource,
-    val usuarioService: UsuarioService
+    private val dataSource: DataSource,
+    private val usuarioService: UsuarioService
     ) : WebSecurityConfigurerAdapter(){
 
     @Value("\${security.signing-key}")
@@ -50,6 +51,9 @@ class SecurityConfig (
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http
+            .logout()
+            .clearAuthentication(true)
+            .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
@@ -66,20 +70,15 @@ class SecurityConfig (
     }
 
     @Bean
+    override fun authenticationManagerBean(): AuthenticationManager {
+        return super.authenticationManagerBean()
+    }
+
+    @Bean
     fun accessTokenConverter(): JwtAccessTokenConverter? {
         val converter = JwtAccessTokenConverter()
         converter.setSigningKey(signingKey)
         return converter
-    }
-
-    @Bean
-    @Primary
-    fun tokenServices(): DefaultTokenServices? {
-        val defaultTokenServices = DefaultTokenServices()
-        defaultTokenServices.setTokenStore(tokenStore())
-        defaultTokenServices.setSupportRefreshToken(true)
-        defaultTokenServices.setReuseRefreshToken(false)
-        return defaultTokenServices
     }
 
 }

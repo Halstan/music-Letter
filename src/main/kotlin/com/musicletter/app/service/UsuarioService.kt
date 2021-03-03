@@ -1,11 +1,14 @@
 package com.musicletter.app.service
 
+import com.musicletter.app.entity.Rol
+import com.musicletter.app.entity.Usuario
 import com.musicletter.app.repository.UsuarioRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
@@ -14,6 +17,22 @@ import java.util.stream.Collectors
 class UsuarioService (
     val usuarioRepository: UsuarioRepository
     ) : UserDetailsService {
+
+    @Transactional
+    fun registro(usuario: Usuario): Usuario {
+        usuario.contrasenha = BCryptPasswordEncoder().encode(usuario.contrasenha)
+        usuario.rol = Rol(2)
+        return this.usuarioRepository.save(usuario)
+    }
+
+    @Transactional
+    fun activarUsuario(nombreDeUsuario: String): Usuario {
+        val usuario = this.usuarioRepository.findByNombreDeUsuarioIgnoreCase(nombreDeUsuario)
+        return if (usuario.isPresent){
+            this.usuarioRepository.confirmarCuenta(nombreDeUsuario)
+            usuario.get()
+        } else Usuario()
+    }
 
     @Transactional(readOnly = true)
     override fun loadUserByUsername(username: String): UserDetails {
