@@ -33,10 +33,16 @@ class CancionController (
     }
 
     @GetMapping(value = ["{idCancion}"])
-    private fun buscarPorId(@PathVariable idCancion: Int): ResponseEntity<*> {
+    private fun buscarPorId(@PathVariable idCancion: String): ResponseEntity<*> {
         val cancion: Optional<Cancion> = this.cancionService.buscarPorId(idCancion);
         return if (cancion.isPresent) ResponseEntity(cancionMapper.toCancionDTO(cancion.get()), HttpStatus.OK)
         else ResponseEntity<Unit>(HttpStatus.NOT_FOUND)
+    }
+
+    @GetMapping(value = ["/usuario"], produces = [type])
+    private fun buscarPorUsuario(): ResponseEntity<*> {
+        val canciones = this.cancionService.buscarCancionesPorUsuario()
+        return ResponseEntity(cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
     }
 
 }

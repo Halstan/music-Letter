@@ -1,5 +1,6 @@
 package com.musicletter.app.dto
 
+import com.musicletter.app.entity.Estado
 import java.util.*
 
 class CancionDTO {
@@ -16,6 +17,10 @@ class CancionDTO {
 
     var urlVideo: String? = null
 
+    var estadoCancion: Estado? = null
+
     var album: AlbumDTO? = null
+
+    var usuario: UsuarioDTO? = null
 
 }

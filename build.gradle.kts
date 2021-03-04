@@ -36,6 +36,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.projectlombok:lombok:1.18.16")
     runtimeOnly("org.postgresql:postgresql")
 
     compileOnly("org.mapstruct:mapstruct-jdk8:1.3.1.Final")

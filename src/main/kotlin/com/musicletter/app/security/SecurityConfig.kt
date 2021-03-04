@@ -48,6 +48,14 @@ class SecurityConfig (
         auth.userDetailsService(this.usuarioService).passwordEncoder(passwordEncoder())
     }
 
+    /*@Bean
+    fun authenticationProvider(): DaoAuthenticationProvider? {
+        val provider = DaoAuthenticationProvider()
+        provider.setPasswordEncoder(passwordEncoder())
+        provider.setUserDetailsService(this.usuarioService)
+        return provider
+    }*/
+
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
         http

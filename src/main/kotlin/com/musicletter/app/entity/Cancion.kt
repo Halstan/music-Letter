@@ -28,9 +28,16 @@ class Cancion: Auditoria() {
     @Column(length = 200)
     val urlVideo: String? = null
 
+    @Enumerated(EnumType.ORDINAL)
+    val estadoCancion: Estado = Estado.ACTIVO
+
     @ManyToOne
     @JoinColumn(name = "idAlbum")
     val album: Album? = null
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    val usuario: Usuario? = null
 
     @PrePersist
     fun init(){

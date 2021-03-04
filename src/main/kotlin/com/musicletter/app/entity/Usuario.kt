@@ -33,6 +33,9 @@ class Usuario : Auditoria() {
     @JoinColumn(name = "idRol")
     var rol: Rol? = null
 
+    @OneToMany(mappedBy = "usuario")
+    var canciones: List<Cancion>? = ArrayList()
+
     @PrePersist
     fun init(){
         estado = false
