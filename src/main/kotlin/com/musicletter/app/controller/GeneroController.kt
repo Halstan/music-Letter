@@ -22,8 +22,8 @@ class GeneroController (
     private fun findAll(): ResponseEntity<*> {
         return ResponseEntity(generoMapper.toGeneroDTOs(this.generoService.buscarTodos()), HttpStatus.OK)
     }
-    
-    @PostMapping(produces = [type])
+
+    @RequestMapping(method = [RequestMethod.POST, RequestMethod.PUT],  produces = [type])
     private fun manipularGenero(@RequestBody genero: Genero): ResponseEntity<*> {
         val genero1: Genero = this.generoService.manipularGenero(genero);
         return ResponseEntity(generoMapper.toGeneroDTO(genero1), HttpStatus.OK)

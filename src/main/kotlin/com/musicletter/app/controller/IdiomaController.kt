@@ -25,7 +25,7 @@ class IdiomaController (
         return ResponseEntity(idiomaMapper.toIdiomaDTOs(this.idiomaService.buscarTodos()), HttpStatus.OK);
     }
 
-    @PostMapping(produces = [type])
+    @RequestMapping(method = [RequestMethod.POST, RequestMethod.PUT], produces = [type])
     private fun manipularIdioma(@RequestBody idioma: Idioma): ResponseEntity<*> {
         return ResponseEntity(idiomaMapper.toIdiomaDTO(this.idiomaService.manipularIdioma(idioma)), HttpStatus.CREATED)
     }

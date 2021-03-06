@@ -31,4 +31,9 @@ class CancionService (
         val username = SecurityContextHolder.getContext().authentication.principal as String
         return this.cancionRepository.getCancionsByUsuarioNombreDeUsuario(username)
     }
+
+    @Transactional(readOnly = true)
+    fun buscarCancionesPorAlbum(idAlbum: Int) =
+        this.cancionRepository.getCancionsByAlbum_IdAlbum(idAlbum)
+
 }

@@ -14,4 +14,6 @@ class AutorDTO {
 
     var alias: String? = null
 
+    var biografia: String? = null
+
 }

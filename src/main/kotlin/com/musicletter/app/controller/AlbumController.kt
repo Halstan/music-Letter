@@ -26,7 +26,7 @@ class AlbumController (
         return ResponseEntity(albumMapper.toAlbumDTOs(albumes), HttpStatus.OK)
     }
 
-    @PostMapping(produces = [CancionController.type])
+    @RequestMapping(method = [RequestMethod.POST, RequestMethod.PUT], produces = [CancionController.type])
     private fun manipularAlbum(@RequestBody album: Album): ResponseEntity<*> {
         return ResponseEntity(albumMapper.toAlbumDTO(this.albumService.manipularAlbum(album)), HttpStatus.CREATED)
     }

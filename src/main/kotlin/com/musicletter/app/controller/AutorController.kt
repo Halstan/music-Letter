@@ -24,7 +24,7 @@ class AutorController (
         return ResponseEntity(autorMapper.toAutorDTOs(this.autorService.findAll()), HttpStatus.OK)
     }
 
-    @PostMapping(produces = [type])
+    @RequestMapping(method = [RequestMethod.POST, RequestMethod.PUT], produces = [type])
     private fun manipularAutor(@RequestBody autor: Autor): ResponseEntity<*> {
         val autor1 = this.autorService.manipularAutor(autor)
         return ResponseEntity(autorMapper.toAutorDTO(autor1), HttpStatus.CREATED)

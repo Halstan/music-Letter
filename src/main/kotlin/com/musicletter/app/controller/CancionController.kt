@@ -27,7 +27,7 @@ class CancionController (
         return ResponseEntity(cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
     }
 
-    @PostMapping(produces = [type])
+    @RequestMapping(method = [RequestMethod.POST, RequestMethod.PUT], produces = [type])
     private fun manipularIdioma(@RequestBody cancion: Cancion): ResponseEntity<*> {
         return ResponseEntity(cancionMapper.toCancionDTO(this.cancionService.manipularCancion(cancion)), HttpStatus.CREATED)
     }
@@ -43,6 +43,12 @@ class CancionController (
     private fun buscarPorUsuario(): ResponseEntity<*> {
         val canciones = this.cancionService.buscarCancionesPorUsuario()
         return ResponseEntity(cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/album/{idAlbum}"])
+    private fun buscarPorIdAlbum(@PathVariable idAlbum: Int): ResponseEntity<*> {
+        val canciones = this.cancionService.buscarCancionesPorAlbum(idAlbum)
+        return ResponseEntity(this.cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
     }
 
 }

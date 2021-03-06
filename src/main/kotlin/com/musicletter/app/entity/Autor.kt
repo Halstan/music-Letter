@@ -26,6 +26,9 @@ class Autor : Auditoria() {
     @Column(length = 40, nullable = false)
     val alias: String? = null
 
+    @Column(length = 300)
+    val biografia: String? = null
+
     @OneToMany(mappedBy = "autor")
     @JsonIgnore
     val albumes: Set<Album>? = null
