@@ -31,11 +31,17 @@ class AlbumController (
         return ResponseEntity(albumMapper.toAlbumDTO(this.albumService.manipularAlbum(album)), HttpStatus.CREATED)
     }
 
-    @GetMapping(value = ["{idAlbum}"])
+    @GetMapping(value = ["{idAlbum}"], produces = [type])
     private fun buscarPorId(@PathVariable idAlbum: Int): ResponseEntity<*> {
         val album: Optional<Album> = this.albumService.buscarPorId(idAlbum);
         return if (album.isPresent) ResponseEntity(albumMapper.toAlbumDTO(album.get()), HttpStatus.OK)
         else ResponseEntity<Unit>(HttpStatus.NOT_FOUND)
+    }
+
+    @GetMapping(value = ["/autor/{idAutor}"])
+    private fun buscarPorAutor(@PathVariable idAutor: Int): ResponseEntity<*> {
+        val albumes = this.albumService.buscarPorAutor(idAutor)
+        return ResponseEntity(this.albumMapper.toAlbumDTOs(albumes), HttpStatus.OK)
     }
 
 }

@@ -24,4 +24,8 @@ class AlbumService (
     fun buscarPorId(idAlbum: Int): Optional<Album> =
         this.albumRepository.findById(idAlbum)
 
+    @Transactional(readOnly = true)
+    fun buscarPorAutor(idAutor: Int): List<Album> =
+        this.albumRepository.getAlbumsByAutorIdAutor(idAutor)
+
 }
