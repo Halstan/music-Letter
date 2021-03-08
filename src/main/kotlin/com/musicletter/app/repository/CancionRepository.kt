@@ -7,6 +7,6 @@ interface CancionRepository : JpaRepository<Cancion, String>{
 
     fun getCancionsByUsuarioNombreDeUsuario(nombreDeUsuario: String): List<Cancion>
 
-    fun getCancionsByAlbum_IdAlbum(idAlbum: Int): List<Cancion>
+    fun getCancionsByAlbumIdAlbum(idAlbum: Int): List<Cancion>
 
 }

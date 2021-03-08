@@ -34,6 +34,6 @@ class CancionService (
 
     @Transactional(readOnly = true)
     fun buscarCancionesPorAlbum(idAlbum: Int) =
-        this.cancionRepository.getCancionsByAlbum_IdAlbum(idAlbum)
+        this.cancionRepository.getCancionsByAlbumIdAlbum(idAlbum)
 
 }
