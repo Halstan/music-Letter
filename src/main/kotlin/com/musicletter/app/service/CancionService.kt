@@ -36,4 +36,8 @@ class CancionService (
     fun buscarCancionesPorAlbum(idAlbum: Int) =
         this.cancionRepository.getCancionsByAlbumIdAlbum(idAlbum)
 
+    @Transactional(readOnly = true)
+    fun buscarCancionPorNombre(nombre: String) =
+        this.cancionRepository.getCancionsByNombreStartsWith(nombre)
+
 }

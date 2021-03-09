@@ -51,4 +51,10 @@ class CancionController (
         return ResponseEntity(this.cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
     }
 
+    @GetMapping(value = ["/nombre/{nombre}"])
+    private fun buscarPorNombre(@PathVariable nombre: String): ResponseEntity<*> {
+        val canciones = this.cancionService.buscarCancionPorNombre(nombre)
+        return ResponseEntity(this.cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
+    }
+
 }

@@ -9,4 +9,6 @@ interface CancionRepository : JpaRepository<Cancion, String>{
 
     fun getCancionsByAlbumIdAlbum(idAlbum: Int): List<Cancion>
 
+    fun getCancionsByNombreStartsWith(nombre: String): List<Cancion>
+
 }
