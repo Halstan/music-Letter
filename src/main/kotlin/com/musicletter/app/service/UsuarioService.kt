@@ -18,6 +18,10 @@ class UsuarioService (
     val usuarioRepository: UsuarioRepository
     ) : UserDetailsService {
 
+    @Transactional(readOnly = true)
+    fun buscarTodos(): List<Usuario> =
+        this.usuarioRepository.findAll()
+
     @Transactional
     fun registro(usuario: Usuario): Usuario {
         usuario.contrasenha = BCryptPasswordEncoder().encode(usuario.contrasenha)

@@ -22,7 +22,8 @@ class Cancion: Auditoria() {
     @JoinColumn(name = "idIdioma")
     val idioma: Idioma? = null
 
-    @Column(length = 2000)
+    @Column(length = 5000)
+    @Lob
     val letra: String? = null
 
     @Column(length = 200)

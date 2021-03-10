@@ -32,6 +32,12 @@ class UsuarioController(
         const val type = "application/json;charset=UTF-8"
     }
 
+    @GetMapping(produces = [type])
+    private fun buscarTodos(): ResponseEntity<*> {
+        val usuarios = this.usuarioService.buscarTodos()
+        return ResponseEntity(this.usuarioMapper.toUsuarioDTOs(usuarios), HttpStatus.OK)
+    }
+
     @PostMapping(produces = [type])
     private fun registrar(@RequestBody usuario: Usuario): ResponseEntity<*> {
         this.usuarioService.registro(usuario)

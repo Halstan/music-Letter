@@ -13,7 +13,7 @@ class IdiomaService constructor (
     val idiomaRepository: IdiomaRepository
     ){
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @Transactional(readOnly = true)
     fun buscarTodos(): List<Idioma> =
         this.idiomaRepository.findAll()
