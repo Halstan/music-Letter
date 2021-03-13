@@ -47,7 +47,8 @@ class UsuarioController(
 
         val templateModel: MutableMap<String, Any> = HashMap()
         templateModel["recipientName"] = "${usuario.nombres} ${usuario.apellidos}"
-        templateModel["text"] = "http://localhost:7050/api/back/confirmar/cuenta/${confirmationToken.confirmationToken}"
+        //templateModel["text"] = "http://localhost:7050/api/back/confirmar/cuenta/${confirmationToken.confirmationToken}"
+        templateModel["text"] = "http://localhost:8080/#/confirmar/${confirmationToken.confirmationToken}"
         templateModel["senderName"] = "enzoarauco@gmail.com"
 
         this.emailService.sendMessageUsingThymeleafTemplate(
