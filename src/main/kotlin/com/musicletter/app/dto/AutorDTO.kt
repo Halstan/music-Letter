@@ -10,6 +10,8 @@ class AutorDTO {
 
     var apellidos: String? = null
 
+    var urlFoto: String? = null
+
     var fechaNacimiento: Date = Date()
 
     var alias: String? = null

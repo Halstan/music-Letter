@@ -20,6 +20,9 @@ class Autor : Auditoria() {
     @Column(length = 40)
     val apellidos: String? = null
 
+    @Column(length = 200)
+    val urlFoto: String? = null
+
     @Temporal(TemporalType.DATE)
     val fechaNacimiento: Date = Date()
 
