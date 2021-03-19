@@ -21,6 +21,9 @@ configurations {
 
 repositories {
     mavenCentral()
+    maven {
+        url = uri("http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/")
+    }
 }
 
 dependencies {
@@ -41,6 +44,13 @@ dependencies {
 
     compileOnly("org.mapstruct:mapstruct-jdk8:1.3.1.Final")
     kapt("org.mapstruct:mapstruct-processor:1.3.1.Final")
+
+    implementation("com.lowagie:itext:2.1.7.js8")
+
+    implementation ("ar.com.fdvs:DynamicJasper:5.3.1")
+    implementation("ar.com.fdvs:DynamicJasper-core-fonts:2.0")
+    implementation("net.sf.jasperreports:jasperreports:6.16.0")
+    implementation("net.sf.jasperreports:jasperreports-fonts:6.16.0")
 
     implementation("org.springframework.data:spring-data-envers")
 

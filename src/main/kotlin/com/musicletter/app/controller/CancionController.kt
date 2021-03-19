@@ -4,17 +4,22 @@ import com.musicletter.app.entity.Cancion
 import com.musicletter.app.entity.Idioma
 import com.musicletter.app.mapper.CancionMapperImpl
 import com.musicletter.app.service.CancionService
+import com.musicletter.app.service.ReportService
 import io.swagger.v3.oas.annotations.Operation
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
+import javax.servlet.http.HttpServletResponse
+import com.musicletter.app.exception.ReportException
+import com.musicletter.app.report.CancionReport
+import org.springframework.http.*
+
 
 @RestController
 @RequestMapping("/canciones")
 class CancionController (
     val cancionService: CancionService,
-    val cancionMapper: CancionMapperImpl
+    val cancionMapper: CancionMapperImpl,
+    val reportService: ReportService
     ){
 
     companion object {
@@ -55,6 +60,21 @@ class CancionController (
     private fun buscarPorNombre(@PathVariable nombre: String): ResponseEntity<*> {
         val canciones = this.cancionService.buscarCancionPorNombre(nombre)
         return ResponseEntity(this.cancionMapper.toCancionDTOs(canciones), HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/reporte"], produces = [MediaType.APPLICATION_PDF_VALUE])
+    @ResponseBody
+    private fun getReport(response: HttpServletResponse): HttpEntity<ByteArray>{
+        val canciones = this.cancionService.buscarTodos()
+        val cancionReport = CancionReport(this.cancionMapper.toCancionDTOs(canciones))
+        val data = this.reportService.getReportPdf(cancionReport.getReport())
+
+        val headers = HttpHeaders()
+        headers.contentType = MediaType.APPLICATION_PDF;
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=Reporte de canciones.pdf");
+        headers.contentLength = data!!.size.toLong();
+
+        return HttpEntity(data, headers)
     }
 
 }
