@@ -3,6 +3,7 @@ package com.musicletter.app.exception
 import java.lang.Exception
 
 class ReportException : Exception {
+
     constructor() {}
     constructor(message: String?) : super(message) {}
     constructor(cause: Throwable?) : super(cause) {}

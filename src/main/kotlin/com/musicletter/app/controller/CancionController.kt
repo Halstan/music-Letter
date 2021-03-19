@@ -63,18 +63,17 @@ class CancionController (
     }
 
     @GetMapping(value = ["/reporte"], produces = [MediaType.APPLICATION_PDF_VALUE])
-    @ResponseBody
-    private fun getReport(response: HttpServletResponse): HttpEntity<ByteArray>{
+    private fun getReport(response: HttpServletResponse): ResponseEntity<*>{
         val canciones = this.cancionService.buscarTodos()
         val cancionReport = CancionReport(this.cancionMapper.toCancionDTOs(canciones))
         val data = this.reportService.getReportPdf(cancionReport.getReport())
 
         val headers = HttpHeaders()
-        headers.contentType = MediaType.APPLICATION_PDF;
-        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=Reporte de canciones.pdf");
-        headers.contentLength = data!!.size.toLong();
+        headers.contentType = MediaType.APPLICATION_PDF
+        headers.set(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=Reporte de canciones.pdf")
+        headers.contentLength = data!!.size.toLong()
 
-        return HttpEntity(data, headers)
+        return ResponseEntity(data, headers, HttpStatus.OK)
     }
 
 }
