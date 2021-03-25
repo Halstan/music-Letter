@@ -28,7 +28,7 @@ class CancionService (
     @PreAuthorize("isAuthenticated()")
     @Transactional(readOnly = true)
     fun buscarCancionesPorUsuario(): List<Cancion> {
-        val username = SecurityContextHolder.getContext().authentication.principal as String
+        val username = SecurityContextHolder.getContext().authentication.name
         return this.cancionRepository.getCancionsByUsuarioNombreDeUsuario(username)
     }
 

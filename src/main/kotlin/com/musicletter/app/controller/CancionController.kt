@@ -33,7 +33,7 @@ class CancionController (
     }
 
     @RequestMapping(method = [RequestMethod.POST, RequestMethod.PUT], produces = [type])
-    private fun manipularIdioma(@RequestBody cancion: Cancion): ResponseEntity<*> {
+    private fun manipularCancion(@RequestBody cancion: Cancion): ResponseEntity<*> {
         return ResponseEntity(cancionMapper.toCancionDTO(this.cancionService.manipularCancion(cancion)), HttpStatus.CREATED)
     }
 
