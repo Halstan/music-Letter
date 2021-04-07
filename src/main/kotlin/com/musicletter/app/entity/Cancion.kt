@@ -38,7 +38,7 @@ class Cancion: Auditoria() {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario")
-    val usuario: Usuario? = null
+    var usuario: Usuario? = null
 
     @PrePersist
     fun init(){
