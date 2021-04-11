@@ -32,6 +32,8 @@ class Cancion: Auditoria() {
     @Enumerated(EnumType.ORDINAL)
     val estadoCancion: Estado = Estado.ACTIVO
 
+    var isEditado: Boolean = false
+
     @ManyToOne
     @JoinColumn(name = "idAlbum")
     val album: Album? = null
@@ -43,6 +45,11 @@ class Cancion: Auditoria() {
     @PrePersist
     fun init(){
         idCancion = UUID.randomUUID().toString()
+    }
+
+    @PreUpdate
+    fun update() {
+        isEditado = true
     }
 
 }

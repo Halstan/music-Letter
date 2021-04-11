@@ -19,6 +19,8 @@ class CancionDTO {
 
     var estadoCancion: Estado? = null
 
+    var isEditado: Boolean = false
+
     var album: AlbumDTO? = null
 
     var usuario: UsuarioDTO? = null
