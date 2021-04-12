@@ -16,10 +16,11 @@ class AlbumService (
     fun buscarTodos(): List<Album> =
         this.albumRepository.findAll()
 
-    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     fun manipularAlbum(album: Album): Album =
         this.albumRepository.save(album)
 
+    @PreAuthorize("isAuthenticated()")
     @Transactional(readOnly = true)
     fun buscarPorId(idAlbum: Int): Optional<Album> =
         this.albumRepository.findById(idAlbum)
