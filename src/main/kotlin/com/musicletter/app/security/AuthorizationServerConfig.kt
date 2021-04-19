@@ -18,6 +18,7 @@ import java.lang.Exception
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices
 
 import org.springframework.context.annotation.Primary
+import javax.sql.DataSource
 
 @Configuration
 @EnableAuthorizationServer
@@ -25,34 +26,12 @@ class AuthorizationServerConfig(
     val tokenStore: TokenStore,
     val accessTokenConverter: JwtAccessTokenConverter,
     val authenticationManager: AuthenticationManager,
-    val bCryptPasswordEncoder: BCryptPasswordEncoder
+    val bCryptPasswordEncoder: BCryptPasswordEncoder,
+    val dataSource: DataSource
     ): AuthorizationServerConfigurerAdapter() {
 
-    @Value("\${security.jwt.client-id}")
-    private val clientId: String? = null
-
-    @Value("\${security.jwt.client-secret}")
-    private val clientSecret: String? = null
-
-    @Value("\${security.jwt.grant-type}")
-    private val grantType: String? = null
-
-    @Value("\${security.jwt.scope-read}")
-    private val scopeRead: String? = null
-
-    @Value("\${security.jwt.scope-write}")
-    private val scopeWrite: String? = null
-
-    @Value("\${security.jwt.resource-ids}")
-    private val resourceIds: String? = null
-
     override fun configure(clients: ClientDetailsServiceConfigurer) {
-        clients.inMemory().withClient(clientId)
-            .secret(this.bCryptPasswordEncoder.encode(clientSecret))
-            .authorizedGrantTypes(grantType, "refresh_token")
-            .scopes(scopeRead, scopeWrite).resourceIds(resourceIds)
-            .accessTokenValiditySeconds(10800)
-            .refreshTokenValiditySeconds(7200)
+        clients.jdbc(dataSource)
     }
 
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer?) {

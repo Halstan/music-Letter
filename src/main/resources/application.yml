@@ -30,11 +30,6 @@ security:
   security-realm: Spring Boot JWT
   signing-key: MaYzkSjmkzPC57L
   jwt:
-    client-id: vueApp
-    client-secret: 12345
-    grant-type: password
-    scope-read: read
-    scope-write: write
     resource-ids: letterid
 
 server:

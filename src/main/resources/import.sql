@@ -17,3 +17,18 @@ create table if not exists oauth_approvals (userId VARCHAR(256),clientId VARCHAR
 
 --customized oauth_client_details table
 create table if not exists ClientDetails (appId VARCHAR(256) PRIMARY KEY,resourceIds VARCHAR(256),appSecret VARCHAR(256),scope VARCHAR(256),grantTypes VARCHAR(256),redirectUrl VARCHAR(256),authorities VARCHAR(256),access_token_validity INTEGER,refresh_token_validity INTEGER,additionalInformation VARCHAR(4096),autoApproveScopes VARCHAR(256));
+
+insert into oauth_client_details(resource_ids, client_id, client_secret, scope, authorized_grant_types,
+                                 web_server_redirect_uri, authorities, access_token_validity,
+                                 refresh_token_validity, additional_information, autoapprove)
+                                 values ('letterid',
+                                         'vueApp',
+                                         '$2a$10$kkeajKPMB6O/jN1o6ZJgtuERUl.z4Pa8/oiHUkAlOlZkIM3k1cg26',
+                                         'read,write',
+                                         'password,refresh_token',
+                                         null,
+                                         null,
+                                         10800,
+                                         7200,
+                                         null,
+                                         true);

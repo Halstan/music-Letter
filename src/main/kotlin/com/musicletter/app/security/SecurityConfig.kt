@@ -74,7 +74,7 @@ class SecurityConfig (
 
     @Bean
     fun tokenStore(): TokenStore? {
-        return JdbcTokenStore(dataSource)
+        return JdbcTokenStores(dataSource)
     }
 
     @Bean
