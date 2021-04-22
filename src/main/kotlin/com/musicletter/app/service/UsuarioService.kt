@@ -1,8 +1,10 @@
 package com.musicletter.app.service
 
+import com.musicletter.app.entity.Permiso
 import com.musicletter.app.entity.Rol
 import com.musicletter.app.entity.Usuario
 import com.musicletter.app.repository.UsuarioRepository
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.stream.Collectors
+
 
 @Service
 class UsuarioService (
@@ -50,6 +53,7 @@ class UsuarioService (
                 true,
                 true,
                 true,
+                //getAuthorities(listOf(usuario.get().rol!!))
                 listOf(usuario.get().rol!!).stream().map { rol ->
                     SimpleGrantedAuthority(
                         rol.nombre
@@ -57,5 +61,29 @@ class UsuarioService (
                 }.collect(Collectors.toList())
             )
         } else throw UsernameNotFoundException("Nombre de usuario no existente")
+    }
+
+    private fun getAuthorities(roles: List<Rol>): List<GrantedAuthority> {
+        return getGrantedAuthorities(getPrivileges(roles))
+    }
+
+    private fun getPrivileges(roles: List<Rol>): List<String> {
+        val privileges: MutableList<String> = ArrayList()
+        val permisos: MutableSet<Permiso> = mutableSetOf()
+        for (rol in roles) {
+            rol.permisos?.let { permisos.addAll(it) }
+        }
+        for (permiso in permisos) {
+            privileges.add(permiso.nombre!!)
+        }
+        return privileges
+    }
+
+    private fun getGrantedAuthorities(privileges: List<String>): List<GrantedAuthority> {
+        val authorities: MutableList<GrantedAuthority> = ArrayList()
+        for (privilege in privileges) {
+            authorities.add(SimpleGrantedAuthority(privilege))
+        }
+        return authorities
     }
 }
