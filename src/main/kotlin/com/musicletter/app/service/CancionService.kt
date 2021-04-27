@@ -33,6 +33,7 @@ class CancionService (
     }
 
     @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated() && hasPermission(#idCancion, 'ROLE_ADMIN')")
     @Transactional(readOnly = true)
     fun buscarPorId(idCancion: String): Optional<Cancion> =
         this.cancionRepository.findById(idCancion)
