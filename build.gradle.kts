@@ -58,6 +58,7 @@ dependencies {
     implementation ("io.springfox:springfox-swagger-ui:2.9.2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.h2database:h2:1.4.200")
     testImplementation("org.springframework.security:spring-security-test")
 }
 

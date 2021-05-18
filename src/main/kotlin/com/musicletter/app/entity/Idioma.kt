@@ -13,6 +13,6 @@ class Idioma : Auditoria() {
     val idIdioma: Int? = null
 
     @Column(length = 30, nullable = false)
-    val nombre: String? = null
+    var nombre: String? = null
 
 }
