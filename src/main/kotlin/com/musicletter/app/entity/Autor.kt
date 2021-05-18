@@ -15,7 +15,7 @@ class Autor : Auditoria() {
     val idAutor: Int? = null
 
     @Column(length = 40)
-    val nombres: String? = null
+    var nombres: String? = null
 
     @Column(length = 40)
     val apellidos: String? = null
@@ -27,7 +27,7 @@ class Autor : Auditoria() {
     val fechaNacimiento: Date = Date()
 
     @Column(length = 40, nullable = false)
-    val alias: String? = null
+    var alias: String? = null
 
     @Column(length = 300)
     val biografia: String? = null
@@ -35,5 +35,9 @@ class Autor : Auditoria() {
     @OneToMany(mappedBy = "autor")
     @JsonIgnore
     val albumes: Set<Album>? = null
+
+    override fun toString(): String {
+        return "Autor(idAutor=$idAutor, nombres=$nombres, apellidos=$apellidos, urlFoto=$urlFoto, fechaNacimiento=$fechaNacimiento, alias=$alias, biografia=$biografia)"
+    }
 
 }

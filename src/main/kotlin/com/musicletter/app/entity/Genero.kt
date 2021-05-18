@@ -13,6 +13,10 @@ class Genero: Auditoria() {
     val idGenero: Int? = null
     
     @Column(length = 30, nullable = false)
-    val nombre: String? = null
+    var nombre: String? = null
+
+    override fun toString(): String {
+        return "Genero(idGenero=$idGenero, nombre=$nombre)"
+    }
 
 }

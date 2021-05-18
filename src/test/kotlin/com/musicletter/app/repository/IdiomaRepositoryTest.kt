@@ -35,7 +35,7 @@ class IdiomaRepositoryTest(
     }
 
     @Test
-    fun shouldFindByNombreNotExists() {
+    fun shouldFindByNombreNotExistence() {
         // GIVEN
         val nombre = "adasd"
         /*val idioma = Idioma()

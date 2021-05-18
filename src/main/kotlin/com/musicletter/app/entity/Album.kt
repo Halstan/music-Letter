@@ -16,25 +16,29 @@ class Album : Auditoria() {
 
     @ManyToOne
     @JoinColumn(name = "idAutor")
-    val autor: Autor? = null
+    var autor: Autor? = null
 
     @ManyToOne
     @JoinColumn(name = "idGenero")
-    val genero: Genero? = null
+    var genero: Genero? = null
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = [CascadeType.MERGE])
     @JoinTable(name="album_genero", joinColumns = [JoinColumn(name="idAlbum")], inverseJoinColumns = [JoinColumn(name="idGenero")],
         uniqueConstraints = [UniqueConstraint(columnNames = ["idAlbum", "idGenero"])])
-    val subGeneros: Set<Genero>? = null
+    var subGeneros: Set<Genero>? = null
 
     @OneToMany(mappedBy = "album")
     @JsonIgnore
     val canciones: Set<Cancion>? = null
 
     @Column(length = 50, nullable = false)
-    val nombre: String? = null
+    var nombre: String? = null
 
     @Temporal(TemporalType.DATE)
     val fechaLanzamiento: Date? = null
+
+    override fun toString(): String {
+        return "Album(idAlbum=$idAlbum, autor=$autor, genero=$genero, subGeneros=$subGeneros, nombre=$nombre, fechaLanzamiento=$fechaLanzamiento)"
+    }
 
 }
