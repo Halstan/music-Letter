@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:6060/musicLetter
-    username: postgres
+    url: jdbc:postgresql://localhost:5432/musicLetter
+    username: halstan
     password: posgre
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect

@@ -1,0 +1,24 @@
+version: '3'
+services:
+  posgre:
+    container_name: 'Db'
+    image: postgres
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_USER: halstan
+      POSTGRES_PASSWORD: posgre
+    networks:
+    - musicLetter
+  pgadmin:
+    container_name: 'PgAdmin'
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_PASSWORD: posgre
+      PGADMIN_DEFAULT_EMAIL: enzoarauco@gmail.com
+    ports:
+    - 5050:80
+    networks:
+    - musicLetter
+networks:
+  musicLetter:
