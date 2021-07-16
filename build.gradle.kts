@@ -22,7 +22,7 @@ configurations {
 repositories {
     mavenCentral()
     maven {
-        url = uri("http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/")
+        url = uri("https://jaspersoft.jfrog.io/ui/native/third-party-ce-artifacts/")
     }
 }
 
